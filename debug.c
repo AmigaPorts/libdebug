@@ -3,7 +3,7 @@
 #include <exec/execbase.h>
 #include <proto/exec.h>
 
-static struct ExecBase* SysBase = NULL;
+struct ExecBase* SysBase = NULL;
 
 
 /**** OS/C/ASM WRAPPERS ******************************************************/
