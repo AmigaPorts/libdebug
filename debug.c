@@ -1,9 +1,11 @@
 
+#define __NOLIBBASE__
 #include <exec/types.h>
 #include <exec/execbase.h>
 #include <proto/exec.h>
 
-struct ExecBase* SysBase = NULL;
+// define a static, local SysBase to not to interfere with the regular SysBase symbol
+static struct ExecBase* SysBase = NULL;
 
 
 /**** OS/C/ASM WRAPPERS ******************************************************/
