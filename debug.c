@@ -4,6 +4,11 @@
 #include <exec/execbase.h>
 #include <proto/exec.h>
 
+#ifndef CONST_APTR_TYPEDEF
+#define CONST_APTR_TYPEDEF
+typedef CONST void * CONST_APTR; /* 32-bit untyped pointer to constant data */
+#endif 
+
 // define a static, local SysBase to not to interfere with the regular SysBase symbol
 static struct ExecBase* SysBase = NULL;
 
@@ -105,8 +110,8 @@ LONG KMayGetChar(VOID) {
   return RawMayGetChar();
 }
 
-VOID KDoFmt(CONST_STRPTR formatString, CONST APTR dataStream,
-	    CONST APTR putChProc, APTR putChData) {
+VOID KDoFmt(CONST_STRPTR formatString, CONST_APTR dataStream,
+	    CONST_APTR putChProc, APTR putChData) {
   struct CallPutChData callputchdata = {
     putChProc, putChData
   };
@@ -154,7 +159,7 @@ LONG KGetChar(VOID) {
   return c;
 }
 
-VOID F(PutFmt)(CONST_STRPTR formatString, CONST APTR values) {
+VOID F(PutFmt)(CONST_STRPTR formatString, CONST_APTR values) {
   KDoFmt(formatString, values, (void (*)(void)) &KPutChar, NULL);
 }
 
