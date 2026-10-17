@@ -69,17 +69,9 @@ tgz:	distclean
 	$(RM) -r /tmp/$(PACKAGE_TARNAME)-$(PACKAGE_VERSION)
 
 #
-# Auto-remake autoconf stuff
+# Remake the configured files.  configure and config.h.in are kept in
+# git, so building never needs autoconf.
 ########################################
-
-${srcdir}/configure: configure.ac
-	cd ${srcdir} && autoconf
-
-# autoheader might not change config.h.in, so touch a stamp file.
-${srcdir}/config.h.in: stamp-h.in
-${srcdir}/stamp-h.in: configure.ac
-	cd ${srcdir} && autoheader
-	echo timestamp > ${srcdir}/stamp-h.in
 
 config.h: stamp-h
 stamp-h: config.h.in config.status
